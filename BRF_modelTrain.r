@@ -11,6 +11,8 @@ positives.train<-read.table("./posTrain.txt",header=T,sep="\t")
 negatives.train<-read.table("./negTrain.txt",header=T,sep="\t")
 
 #Tune the mtry
+tuned<-tuneRF(rbind(positives.train[,-ncol(positives.train)],negatives.train[,-ncol(positives.train)]), as.factor(c(positives.train$labels,negatives.train$labels)),plot=F,trace=F)
+tuned.mtry<-tuned[,1][which.min(tuned[,2])][[1]]
 
 
 #Set the number of samples to draw from both classes at 
